@@ -8,7 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@ixily/activ-web": "^2.1.111",
+    "@ixily/activ-web": "2.1.111",
     "@metamask/detect-provider": "^2.0.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
