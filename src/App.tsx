@@ -10,17 +10,21 @@ import detectEthereumProvider from '@metamask/detect-provider';
 
 const App = () => {
 
+  const [loading, setLoading] = useState<boolean>(false);
   const [ideas, setIdeas] = useState<any>([]);
 
   const init = async () => {
     try {
+
+      setLoading(true);
+
       const ethereum: any = await detectEthereumProvider();
 
       await ethereum?.request({ method: 'eth_requestAccounts' });
 
       const chainIds: any = {
         goerli: 5,
-        hardhat: 1337, //31337
+        hardhat: 1337,
         kovan: 42,
         mainnet: 1,
         rinkeby: 4,
@@ -53,7 +57,9 @@ const App = () => {
         })
 
         const ideas = await activ.getAllIdeas(1, 30);
+
         setIdeas(ideas?.data);
+        setLoading(false);
 
       }
 
@@ -73,6 +79,7 @@ const App = () => {
   return (
     <div>
       <h1 className='title'>ACTIV Ideas</h1>
+      {loading ? <div className="loading"><img src="src/loader.gif"></img></div> : null}
       <div className='main-container'>
         {
           ideas?.map((idea: any) => {
